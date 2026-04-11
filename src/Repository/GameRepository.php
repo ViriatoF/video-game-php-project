@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
-class GameRepository
+class GameRepository implements RepositoryInterface
 {
     public function __construct(private \PDO $pdo) {}
 

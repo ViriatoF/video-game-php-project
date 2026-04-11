@@ -23,12 +23,28 @@ class GameController
     }
 
     public function create(): void
-{
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $this->repository->save($_POST);
-        header('Location: index.php?page=games');
-        exit;
+    {
+        if ('POST' === $_SERVER['REQUEST_METHOD']) {
+            $this->repository->save($_POST);
+            header('Location: index.php?page=games');
+
+            exit;
+        }
+
+        require __DIR__.'/../../views/games/create.php';
     }
-    require __DIR__ . '/../../views/games/create.php';
-}
+
+    public function show(int $id): void
+    {
+        $game = $this->repository->find($id);
+
+        if (!$game) {
+            http_response_code(404);
+            echo 'Jeu non trouvé';
+
+            return;
+        }
+
+        require __DIR__.'/../../views/games/show.php';
+    }
 }
