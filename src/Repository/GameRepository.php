@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
-class GameRepository
+use App\Interfaces\RepositoryInterface;
+
+class GameRepository implements RepositoryInterface
 {
     public function __construct(private \PDO $pdo) {}
 
@@ -26,24 +28,37 @@ class GameRepository
 
     public function create(array $data): int
     {
-        $stmt = $this->pdo->prepare('INSERT INTO games ( title, genre, release_date) VALUES (:title, :genre,:release_date)');
-        $stmt->execute($data);
+        try {
+            $stmt = $this->pdo->prepare('INSERT INTO games ( title, genre, release_date) VALUES (:title, :genre,:release_date)');
+            $stmt->execute($data);
 
-        return (int) $this->pdo->lastInsertId();
+            return (int) $this->pdo->lastInsertId();
+        } catch (\PDOException $error) {
+            return 0;
+        }
     }
 
     public function update(int $id, array $data): void
     {
-        $stmt = $this->pdo->prepare(
-            'UPDATE games SET title = :title, genre = :genre, release_date = :release_date WHERE id = :id'
-        );
-        $stmt->execute([...$data, 'id' => $id]);
+        try {
+            $stmt = $this->pdo->prepare(
+                'UPDATE games SET title = :title, genre = :genre, release_date = :release_date WHERE id = :id'
+            );
+            $stmt->execute([...$data, 'id' => $id]);
+        } catch (\PDOException $error) {
+            return;
+        }
     }
 
-    public function delete(int $id): void
+    public function delete(int $id): bool
     {
-        $this->pdo->prepare('DELETE FROM games WHERE id = :id')
-            ->execute(['id' => $id])
-        ;
+        try {
+            $stmt = $this->pdo->prepare('DELETE FROM games WHERE id = :id');
+            $stmt->execute(['id' => $id]);
+
+            return true;
+        } catch (\PDOException $error) {
+            return false;
+        }
     }
 }

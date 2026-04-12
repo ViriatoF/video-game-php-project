@@ -3,6 +3,7 @@ $title = 'Catalogue jeux vidéos';
 
 ob_start(); ?>
 
+
 <h1>Catalogue (<?php echo count($games); ?> Jeux)</h1>
 <table>
     <?php foreach ($games as $game) { ?>
