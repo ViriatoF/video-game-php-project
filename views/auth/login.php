@@ -5,8 +5,8 @@
 <?php } ?>
 
 <form method="POST" action="index.php?page=auth&action=login">
-    <!-- <input type="hidden" name="csrf_token"
-           value="<?php echo $_SESSION['csrf_token']; ?>"> -->
+    <input type="hidden" name="csrf_token"
+           value="<?php echo $_SESSION['csrf_token']; ?>">
     <label for="email">Email
         <input type="email" name="email"
                value="<?php echo htmlspecialchars($old['email'] ?? ''); ?>">

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Middleware\CsrfMid;
 use App\Repository\UserRepository;
 
 class AuthController
@@ -22,6 +23,9 @@ class AuthController
 
             return;
         }
+
+        $csrf = new CsrfMid();
+        $csrf->CheckCsrf();
 
         // Validation
         $errors = [];
@@ -72,6 +76,9 @@ class AuthController
 
             return;
         }
+
+        $csrf = new CsrfMid();
+        $csrf->CheckCsrf();
 
         $email = trim($_POST['email'] ?? '');
         $password = $_POST['password'] ?? '';
