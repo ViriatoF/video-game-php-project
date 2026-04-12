@@ -6,7 +6,7 @@ namespace App\Repository;
 
 class UserRepository
 {
-    public function __construct(private PDO $pdo) {}
+    public function __construct(private \PDO $pdo) {}
 
     public function findByEmail(string $email): ?array
     {
@@ -17,7 +17,7 @@ class UserRepository
         return $user ?: null; // fetch() retourne false si rien trouvé
     }
 
-    public function create(array $data)
+    public function create(array $data) : void
     {
         $stmt = $this->pdo->prepare('INSERT INTO users ( name, email, password) VALUES (:name, :email, :password)');
         $stmt->execute($data);

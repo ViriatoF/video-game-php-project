@@ -26,7 +26,7 @@ class GameController
     {
         if ('POST' === $_SERVER['REQUEST_METHOD']) {
             $this->repository->save($_POST);
-            header('Location: index.php?page=games');
+            header('Location: index.php?page=games&action=list');
 
             exit;
         }
