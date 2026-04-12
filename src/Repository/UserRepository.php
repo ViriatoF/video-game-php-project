@@ -17,7 +17,7 @@ class UserRepository
         return $user ?: null; // fetch() retourne false si rien trouvé
     }
 
-    public function create(array $data) : void
+    public function create(array $data): void
     {
         $stmt = $this->pdo->prepare('INSERT INTO users ( name, email, password) VALUES (:name, :email, :password)');
         $stmt->execute($data);

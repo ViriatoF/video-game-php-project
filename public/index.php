@@ -8,6 +8,10 @@ require __DIR__.'/../vendor/autoload.php';
 
 require __DIR__.'/../config/database.php';
 
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+
 use App\Controller\AuthController;
 use App\Controller\GameController;
 

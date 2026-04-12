@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Middleware\CsrfMid;
 use App\Repository\GameRepository;
 
 class GameController
@@ -25,6 +26,8 @@ class GameController
     public function create(): void
     {
         if ('POST' === $_SERVER['REQUEST_METHOD']) {
+            $csrf = new CsrfMid();
+            $csrf->CheckCsrf();
             $this->repository->save($_POST);
             header('Location: index.php?page=games&action=list');
 

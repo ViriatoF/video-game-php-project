@@ -8,7 +8,7 @@
 <h1>Inscription</h1>
 
     <form action="index.php?page=auth&action=register" method="POST">
-        <!-- <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>"> -->
+        <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
 
         <label for="name">Nom
             <input type="text" name="name"value="<?php echo htmlspecialchars($old['name'] ?? ''); ?>">
