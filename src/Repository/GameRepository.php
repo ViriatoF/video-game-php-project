@@ -10,12 +10,16 @@ class GameRepository implements RepositoryInterface
 {
     public function __construct(private \PDO $pdo) {}
 
-    public function findAll(): array
+    public function findByUser(int $id): array
     {
-        $sql = 'SELECT * FROM games
-                ORDER BY games.release_date DESC';
+        $sql = $this->pdo->prepare('SELECT games.* FROM games
+                JOIN user_games ON games.id = user_games.game_id 
+                WHERE user_games.user_id = :user_id
+                ORDER BY games.release_date DESC');
 
-        return $this->pdo->query($sql)->fetchAll();
+        $sql->execute(['user_id' => $id]);
+
+        return $sql->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     public function find(int $id): array

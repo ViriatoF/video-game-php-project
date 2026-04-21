@@ -25,6 +25,7 @@ $action = $_GET['action'] ?? 'login';
 match ($page.'/'.$action) {
     'auth/login' => $authController->login(),
     'auth/register' => $authController->register(),
+    'auth/logout' => $authController->logout(),
 
     'games/list' => $controller->list(),
     'games/show' => $controller->show((int) ($_GET['id'] ?? 0)),

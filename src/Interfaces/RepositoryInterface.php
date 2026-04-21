@@ -6,7 +6,7 @@ interface RepositoryInterface
 {
     public function find(int $id): ?array;
 
-    public function findAll(): array;
+    public function findByUser(int $id): array;
 
     public function create(array $data): int;
 
