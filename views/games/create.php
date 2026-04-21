@@ -7,24 +7,24 @@ ob_start();
 
 <form method="POST" action="index.php?page=games&action=create">
 
-<input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?? '' ?>">
+<input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token'] ?? ''; ?>">
     <div>
         <label for="title">Titre</label>
         <input type="text" id="title" name="title"
-               value="<?= htmlspecialchars($old['title'] ?? '') ?>">
-        <?php if (isset($errors['title'])): ?>
-            <p style="color: red"><?= $errors['title'] ?></p>
-        <?php endif; ?>
+               value="<?php echo htmlspecialchars($old['title'] ?? ''); ?>">
+        <?php if (isset($errors['title'])) { ?>
+            <p style="color: red"><?php echo $errors['title']; ?></p>
+        <?php } ?>
     </div>
 
     <div>
         <label for="release_date">Date de sortie</label>
         <input type="date" id="release_date" name="release_date"
-               value="<?= htmlspecialchars($old['release_date'] ?? '') ?>">
+               value="<?php echo htmlspecialchars($old['release_date'] ?? ''); ?>">
         
-        <?php if (isset($errors['release_date'])): ?>
-            <p style="color: red"><?= $errors['release_date'] ?></p>
-        <?php endif; ?>
+        <?php if (isset($errors['release_date'])) { ?>
+            <p style="color: red"><?php echo $errors['release_date']; ?></p>
+        <?php } ?>
     </div>
 
     <div>
@@ -33,38 +33,38 @@ ob_start();
         <select id="genre" name="genre">
             <option value="">-- Sélectionnez un genre --</option>
             
-            <option value="Action" <?= ($old['genre'] ?? '') === 'Action' ? 'selected' : '' ?>>
+            <option value="Action" <?php echo ($old['genre'] ?? '') === 'Action' ? 'selected' : ''; ?>>
                 Action
             </option>
             
-            <option value="RPG" <?= ($old['genre'] ?? '') === 'RPG' ? 'selected' : '' ?>>
+            <option value="RPG" <?php echo ($old['genre'] ?? '') === 'RPG' ? 'selected' : ''; ?>>
                 RPG
             </option>
-            <option value="FPS" <?= ($old['genre'] ?? '') === 'FPS' ? 'selected' : '' ?>>
+            <option value="FPS" <?php echo ($old['genre'] ?? '') === 'FPS' ? 'selected' : ''; ?>>
                 FPS
             </option>
             
-            <option value="Adventure" <?= ($old['genre'] ?? '') === 'Adventure' ? 'selected' : '' ?>>
+            <option value="Adventure" <?php echo ($old['genre'] ?? '') === 'Adventure' ? 'selected' : ''; ?>>
                 Aventure
             </option>
             
-            <option value="Platform" <?= ($old['genre'] ?? '') === 'Platform' ? 'selected' : '' ?>>
+            <option value="Platform" <?php echo ($old['genre'] ?? '') === 'Platform' ? 'selected' : ''; ?>>
                 Plateforme
             </option>
-            <option value="Simulation" <?= ($old['genre'] ?? '') === 'Simulation' ? 'selected' : '' ?>>
+            <option value="Simulation" <?php echo ($old['genre'] ?? '') === 'Simulation' ? 'selected' : ''; ?>>
                 Simulation
             </option>
-            <option value="Strategy" <?= ($old['genre'] ?? '') === 'Strategy' ? 'selected' : '' ?>>
+            <option value="Strategy" <?php echo ($old['genre'] ?? '') === 'Strategy' ? 'selected' : ''; ?>>
                 Stratégie
             </option>
-            <option value="Sports" <?= ($old['genre'] ?? '') === 'Sports' ? 'selected' : '' ?>>
+            <option value="Sports" <?php echo ($old['genre'] ?? '') === 'Sports' ? 'selected' : ''; ?>>
                 Sports
             </option>
         </select>
 
-        <?php if (isset($errors['genre'])): ?>
-            <p style="color: red"><?= $errors['genre'] ?></p>
-        <?php endif; ?>
+        <?php if (isset($errors['genre'])) { ?>
+            <p style="color: red"><?php echo $errors['genre']; ?></p>
+        <?php } ?>
     </div>
 
     <button type="submit">Ajouter</button>
@@ -73,4 +73,5 @@ ob_start();
 
 <?php
 $content = ob_get_clean();
-require __DIR__ . '/../layout.php';
+
+require __DIR__.'/../layout.php';

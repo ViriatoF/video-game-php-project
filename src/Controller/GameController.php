@@ -54,7 +54,7 @@ class GameController
                 $this->repository->create([
                     'title' => $old['title'],
                     'genre' => $old['genre'],
-                    'release_date' =>  $old['release_year'],
+                    'release_date' => $old['release_year'],
                 ]);
 
                 header('Location: index.php?page=games&action=list');
